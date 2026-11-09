@@ -24,4 +24,5 @@ function save(products, file) {
   fs.writeFileSync(f, JSON.stringify(data, null, 2));
 }
 
+
 module.exports = { load, save };

@@ -30,6 +30,7 @@ function createApp(options = {}) {
     repo.save(inv.products, file);
     res.json(inv.products);
   });
+  
 
   return app;
 }

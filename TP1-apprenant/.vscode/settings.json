@@ -1,0 +1,8 @@
+{
+    "github.copilot.enable": {
+        "javascript": true,
+        "markdown": true,
+        "plaintext": false,
+        "json": false
+    }
+}

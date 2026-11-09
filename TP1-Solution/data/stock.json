@@ -1,0 +1,10 @@
+[
+  { "name": "Baguette tradition", "expiresIn": 1, "quality": 10 },
+  { "name": "Yaourt fermier", "expiresIn": 7, "quality": 20 },
+  { "name": "Comté affiné 24 mois", "expiresIn": 2, "quality": 0 },
+  { "name": "Levain mère de la maison", "expiresIn": 0, "quality": 80 },
+  { "name": "Billet dégustation - Vins de Loire", "expiresIn": 15, "quality": 20 },
+  { "name": "Billet dégustation - Fromages affinés", "expiresIn": 10, "quality": 45 },
+  { "name": "Billet dégustation - Chocolats grands crus", "expiresIn": 5, "quality": 49 },
+  { "name": "Jus de pomme bio", "expiresIn": 3, "quality": 6 }
+]
