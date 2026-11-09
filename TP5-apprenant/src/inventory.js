@@ -38,48 +38,39 @@ class Inventory {
    * @returns {Product[]} Les produits mis à jour (même tableau que celui passé au constructeur).
    */
   endOfDay() {
-    for (let i = 0; i < this.products.length; i++) {
-      if (this.products[i].name != 'Comté affiné 24 mois' && !this.products[i].name.startsWith('Billet dégustation')) {
-        if (this.products[i].quality > 0) {
-          if (this.products[i].name != 'Levain mère de la maison') {
-            this.products[i].quality = this.products[i].quality - 1;
+    for (const product of this.products) {
+      const isCheese = product.name === 'Comté affiné 24 mois';
+      const isSourdough = product.name === 'Levain mère de la maison';
+      const isTastingTicket = product.name.startsWith('Billet dégustation');
+
+      if (isCheese || isTastingTicket) {
+        if (product.quality < 50) {
+          product.quality += 1;
+
+          if (isTastingTicket && product.expiresIn < 11 && product.quality < 50) {
+            product.quality += 1;
+          }
+          if (isTastingTicket && product.expiresIn < 6 && product.quality < 50) {
+            product.quality += 1;
           }
         }
-      } else {
-        if (this.products[i].quality < 50) {
-          this.products[i].quality = this.products[i].quality + 1;
-          if (this.products[i].name.startsWith('Billet dégustation')) {
-            if (this.products[i].expiresIn < 11) {
-              if (this.products[i].quality < 50) {
-                this.products[i].quality = this.products[i].quality + 1;
-              }
-            }
-            if (this.products[i].expiresIn < 6) {
-              if (this.products[i].quality < 50) {
-                this.products[i].quality = this.products[i].quality + 1;
-              }
-            }
-          }
-        }
+      } else if (!isSourdough && product.quality > 0) {
+        product.quality -= 1;
       }
-      if (this.products[i].name != 'Levain mère de la maison') {
-        this.products[i].expiresIn = this.products[i].expiresIn - 1;
+
+      if (!isSourdough) {
+        product.expiresIn -= 1;
       }
-      if (this.products[i].expiresIn < 0) {
-        if (this.products[i].name != 'Comté affiné 24 mois') {
-          if (!this.products[i].name.startsWith('Billet dégustation')) {
-            if (this.products[i].quality > 0) {
-              if (this.products[i].name != 'Levain mère de la maison') {
-                this.products[i].quality = this.products[i].quality - 1;
-              }
-            }
-          } else {
-            this.products[i].quality = this.products[i].quality - this.products[i].quality;
+
+      if (product.expiresIn < 0) {
+        if (isCheese) {
+          if (product.quality < 50) {
+            product.quality += 1;
           }
-        } else {
-          if (this.products[i].quality < 50) {
-            this.products[i].quality = this.products[i].quality + 1;
-          }
+        } else if (isTastingTicket) {
+          product.quality -= product.quality;
+        } else if (!isSourdough && product.quality > 0) {
+          product.quality -= 1;
         }
       }
     }
